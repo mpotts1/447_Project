@@ -1,1 +1,5 @@
-# 447_Project
+# 447 Sceduler Project
+
+Python 3.7
+
+Michael Potts
