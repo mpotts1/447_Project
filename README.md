@@ -6,3 +6,4 @@ Michael Potts.
 Owen Crandall.
 Joey Slovik.
 Grace Ashburn.
+Trenton Foster
