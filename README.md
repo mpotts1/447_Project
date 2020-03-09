@@ -4,6 +4,6 @@ Python 3.7
 
 Michael Potts.
 Owen Crandall.
-Joey Slovik.
+Joey Slovick.
 Grace Ashburn.
 Trenton Foster
