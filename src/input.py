@@ -1,20 +1,5 @@
-#Get Input from UI
+from src.get_classes import get_available_class
 
-#Basic class functions
-
-'''Data needed -
-    CLASS
-	c_instructor	varchar(30),
-    c_students		numeric(3,0),
-    c_duration		numeric(3,0), -- expects duration in minutes
-    c_start_time	time,
-    c_dept			varchar(4),
-    c_number		varchar(4), check (c_number between "100" and "999Z"),
-    c_section		numeric(2,0), check (c_section >= 0),
-
-    CLASS DAY
-    dayOfWeek		varchar(9), check(dayOfWeek in("Monday","Tuesday","Wednesday","Thursday","Friday")),
-    '''
 
 def get_class_available(instructor, students, duration, time, dept, number, section, day_of_week):
 
@@ -39,20 +24,20 @@ def get_class_available(instructor, students, duration, time, dept, number, sect
     if(len(invalid_data) > 0):
         return invalid_data
 
-    #Call some other function here to generate constraints,
-
+    #Will return a list of all available rooms from constraints
+    return get_available_class(instructor, students, duration, time, dept, number, section, day_of_week)
 
 #parameter is a single element in the return from get_class_available
-def add_class():
-
-
+def add_class(TBD):
+    print("Add class")
+    #Add class to database, return success of failure
 
 ''' need primary key(c_dept, c_number, c_section) '''
 def remove_class(dept, number, section):
     print("Remove Class")
 
 
-def modify_class():
+def modify_class(dept, number, section):
     print("Modify Class")
 
 
