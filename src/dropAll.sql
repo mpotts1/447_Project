@@ -2,13 +2,16 @@
 -- Written by Joey Slovick for Team 1/Team Terminal
 
 -- dropAll: deletes all database elements and the database itself
--- For testing purposes only.
 
--- Last modified date: 2020-03-08
+-- For testing purposes only.
+-- Executable only with admin permissions.
+
+-- Last modified date: 2020-03-28
 
 use SCHEDULER;
 
-drop table occupies;
+drop view c_d;
+
 drop table class_day;
 drop table class;
 drop table room;
