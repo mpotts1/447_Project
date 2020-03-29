@@ -1,5 +1,5 @@
 Full disclosure: I've never written code to connect to a database server hosted somewhere other than the machine the code was running on.
-This SHOULD be how it works in Python for our project, if it isn't:
+This SHOULD be how it works in Python for our project:
 
 1) Put these 3 lines at the begininning of your code (note that the second line is the part I'm not sure I've got right):
 
