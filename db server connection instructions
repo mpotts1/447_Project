@@ -1,10 +1,11 @@
-Full disclosure: I've never written code to connect to a database server hosted somewhere other than the machine the code was running on.
-This SHOULD be how it works in Python for our project:
+Update 4/1: Michael and I got successfully tested the code below
+
+This is how conencting to the database works in Python for our project:
 
 1) Put these 3 lines at the begininning of your code (note that the second line is the part I'm not sure I've got right):
 
 import mysql.connector
-cnx = mysql.connector.connect(user = 'user', password = 'team_terminal', host = '96.244.68.135', port = 3306, database = 'SCHEDULER')
+cnx = mysql.connector.connect(user = 'user', password = 'team_terminal', host = '96.244.68.135', port = 3306, database = 'SCHEDULER', buffered = true)
 db = cnx.cursor()
 
 2) Do a query similar to what's seen at https://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-transaction.html
@@ -22,10 +23,8 @@ cnx.commit()
 db.close()
 cnx.close()
 
-3) If you get an error message executing the above query try changing the building or room number, someone else might have already
-added that room and duplicates aren't allowed.
-
-3a) Also note if you tried to do a drop or create query, the user profile doesn't have access to those, try an insert
+3) If you get an error message executing the above query try changing the building (ITE) or room number (101), someone else might 
+have already added that room and duplicates aren't allowed.
 
 4) If you still can't get it to work contact me (Joey) and make sure my computer/Internet are working (I'm hosting the server locally,
 I'll leave it running but shit happens)
