@@ -18,17 +18,17 @@ data = {
     'nType' : "LECTURE"
 }
 
-#The nested SQL query, starting with the SELECT statement on line 26, selects all rooms that are disqualified due to time overlap with another class
-#The outer SQL query, starting with the SELECT statement on line 23, selects all rooms that match the capacity and type constraints that are not in the product of the nested query
+#The nested SQL query, starting with the SELECT statement on line 27, selects all rooms that are disqualified due to time overlap with another class
+#The outer SQL query, starting with the SELECT statement on line 24, selects all rooms that match the capacity and type constraints that are not in the product of the nested query
 
 query = ("SELECT r_building as building, r_no as num "
          "FROM room "
          "WHERE r_tech = %(nTech)s AND r_capacity >= %(minCap)s AND r_type = %(nType)s AND (r_building, r_no) NOT IN ("
-                                         "SELECT r_building, r_no "
-                                         "FROM c_d "
-                                         "WHERE (c_day = %(day1)s OR c_day = %(day2)s OR c_day = %(day3)s) AND "
-                                             "((TIMEDIFF(c_start_time, %(nTime)s)+0 >= 0 AND TIMEDIFF(ADDTIME(%(nDur)s, %(nTime)s), c_start_time)+0 > 0) OR "
-                                             "(TIMEDIFF(%(nTime)s, c_start_time)+0 >= 0 AND TIMEDIFF(ADDTIME(c_duration, c_start_time), %(nTime)s)+0 > 0)))")
+             "SELECT r_building, r_no "
+             "FROM c_d "
+             "WHERE (c_day = %(day1)s OR c_day = %(day2)s OR c_day = %(day3)s) AND "
+                 "((TIMEDIFF(c_start_time, %(nTime)s)+0 >= 0 AND TIMEDIFF(ADDTIME(%(nDur)s, %(nTime)s), c_start_time)+0 > 0) OR "
+                 "(TIMEDIFF(%(nTime)s, c_start_time)+0 >= 0 AND TIMEDIFF(ADDTIME(c_duration, c_start_time), %(nTime)s)+0 > 0)))")
 
 # 4 scenarios can disqualify a room based on time overlap with another class:
 
@@ -37,12 +37,12 @@ query = ("SELECT r_building as building, r_no as num "
 # 3) The new class starts before and ends after an existing class ("surrounding" it)
 # 4) The new class starts after and ends before an existing class ("surrounded by" it)
                                              
-# 1 and 3 are handled by the statement on line 29
-# 2 and 4 are handled by the statement on line 30
+# 1 and 3 are handled by the statement on line 30
+# 2 and 4 are handled by the statement on line 31
                                              
 # Edge cases: If one class ends exactly at the start time of another, it is not caught by the nested statement, so the outer statement is allowed to select it
 
-# This query can be altered for use by 1 or 2 day classes by removing 'OR c_day = %(day#)s' from the statement on line 28 and the entry in the dictionary, labeled in this sample as 'data'
+# This query can be altered for use by 1 or 2 day classes by removing 'OR c_day = %(day#)s' from the statement on line 29 and the entry in the dictionary, labeled in this sample as 'data'
 # This query can be altered to allow laxer requests (ie r_tech doesn't matter) by removing the unneeded entry from line 26 and the corresponding entry from the dictionary
 
 db.execute(query, data)
