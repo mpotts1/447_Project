@@ -12,6 +12,7 @@ insert into room values("SOND",	"201",	40,		false,	"ACTVLRN");
 insert into room values("SOND",	"202",	45,		false,	"ACTVLRN");
 insert into room values("SOND",	"203",	100,	true,	"THEATER");
 insert into room values("SOND",	"301",	200,	false,	"LECTURE");
+insert into room values("LH1",	"101",	200,	false,	"LECTURE");
 
 -- 						instructor				studnts	durat	start	dept	class	sec	build	num
 insert into class values("Marcus Smith",		31,		011500,	113000,	"CMPE",	"201",	1, 	"SOND", "201");
@@ -32,4 +33,5 @@ insert into class_day values("CMPE",	"201",	2, 	"MON");
 insert into class_day values("CMPE",	"201",	2, 	"WED");
 insert into class_day values("PHYS",	"122L",	4, 	"THU");
 
-select * from c_d order by c_start_time asc;
+select * from class order by c_start_time asc;
+select * from room;
