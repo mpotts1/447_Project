@@ -1,16 +1,28 @@
 import constraint
 import src.sql_handler
 
-def time_room_constraint(room, time, duration, day_of_week):
-    if room.isEmpty(time, duration, day_of_week):
+
+def room_time_constraint(room, time, duration, day_of_week):
+    if room.is_empty(time, duration, day_of_week):
         return True
 
-def get_available_class(instructor, students, duration, time, dept, number, section, day_of_week):
+def room_size_constraint(room, students):
+    if room["room_capacity"] >= students:
+        return True
+
+def room_tech_constraint(room):
+    return room["room_is_tech"]
+
+def room_type_constraint(room, type):
+    if room["room_type"] == type:
+        return True
+
+def get_available_room(instructor, students, duration, time, dept, number, section, day_of_week):
     problem = constraint.Problem()
+    rooms = src.sql_handler.get_rooms()
 
-    #problem.addVariable("room", [set of rooms]) #"Set of rooms" will be replaced by the column of rooms
-
-    problem.addConstraint(time_room_constraint, ["time", "room", "duration", "day_of_week"])
+    problem.addVariable(room, rooms)
+    
 
     solutions = problem.getSolutions()
     return solutions
