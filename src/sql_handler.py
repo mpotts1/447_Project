@@ -21,6 +21,45 @@ def get_rooms():
     return rooms
 
 
+def get_rooms_on_day(start_time, dur, days, capacity, is_tech, class_type):
+
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
+
+    for day in days:
+
+        data = {
+            'nTime': start_time,
+            'nDur': dur,
+            'day': day,
+            'minCap': capacity,
+            'nTech': is_tech,
+            'nType': class_type
+        }
+
+        query = ("SELECT r_building as building, r_no as num "
+                 "FROM room "
+                 "WHERE r_tech = %(nTech)s AND r_capacity >= %(minCap)s AND r_type = %(nType)s AND (r_building, r_no) NOT IN ("
+                 "SELECT r_building, r_no "
+                 "FROM c_d "
+                 "WHERE (c_day = %(day)s) AND "
+                 "((TIMEDIFF(c_start_time, %(nTime)s)+0 >= 0 AND TIMEDIFF(ADDTIME(%(nDur)s, %(nTime)s), c_start_time)+0 > 0) OR "
+                 "(TIMEDIFF(%(nTime)s, c_start_time)+0 >= 0 AND TIMEDIFF(ADDTIME(c_duration, c_start_time), %(nTime)s)+0 > 0)))")
+
+        db.execute(query, data)
+
+    db.close()
+    cnx.close()
+
+    rooms = []
+    for room in db:
+        rooms.append(room)
+    return rooms
+
+#Example
+#get_rooms_on_day(start_time="14:00:00", dur= "00:50:00", days=["\"MON\"", "\"WED\""], capacity=30, is_tech=0, class_type="LECTURE")
+
 def get_list_classes():
     cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
                                   database='SCHEDULER', buffered=True)

@@ -44,7 +44,7 @@ def modify_class(dept, number, section):
 
 #Test/Example Function input
 #Good
-#get_class_available("Test Instructor", 3, 90, "12:30","CMSC", "447", 0, ["Monday", "Wednesday"])
+#get_class_available("Test Instructor", 3, 90, "12:30","CMSC", "447", 0, ["Mon", "Wed"])
 
 #Bad
 #get_class_available("Test Instructor", "3", "90", 1230, "CMSC", 447, "0", "[Monday,Wednesday]")
