@@ -20,12 +20,14 @@ def room_type_constraint(room, type):
 def get_available_room(instructor, students, duration, time, dept, number, section, day_of_week):
     problem = constraint.Problem()
     rooms = src.sql_handler.get_rooms()
+    return rooms
 
-    problem.addVariable(room, rooms)
+
+    #problem.addVariable(room, rooms)
     
 
-    solutions = problem.getSolutions()
-    return solutions
+    #solutions = problem.getSolutions()
+    #return solutions
 
 
 
