@@ -19,7 +19,7 @@ def room_type_constraint(room, type):
 
 def get_available_room(instructor, students, duration, time, dept, number, section, day_of_week):
     problem = constraint.Problem()
-    rooms = src.sql_handler.get_rooms()
+    rooms = src.sql_handler.get_rooms_on_day(time, duration, day_of_week, students, 0, "LECTURE")
     return rooms
 
 
@@ -39,5 +39,5 @@ for room in rooms:
     #Individual element
     print(room["room_building"])
 
-classes = src.sql_handler.get_list_classes()
-print(classes)
+#classes = src.sql_handler.get_list_classes()
+#print(classes)

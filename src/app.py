@@ -6,7 +6,6 @@ from flask import request
 from src.input import get_rooms_available
 
 
-
 app = Flask(__name__)
 
 @app.route("/")
