@@ -58,7 +58,31 @@ def get_rooms_on_day(start_time, dur, days, capacity, is_tech, class_type):
     return rooms
 
 #Example
-#get_rooms_on_day(start_time="14:00:00", dur= "00:50:00", days=["\"MON\"", "\"WED\""], capacity=30, is_tech=0, class_type="LECTURE")
+#get_rooms_on_day(start_time="14:00:00", dur= "00:50:00", days=["MON", "WED"], capacity=30, is_tech=0, class_type="LECTURE")
+
+
+def add_class(instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number, days):
+
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
+
+    class_data = (instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number)
+
+    query = ("INSERT INTO class VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+    db.execute(query, class_data)
+
+    for day in days:
+
+        query = ("INSERT INTO class_day VALUES(%s, %s, %s, %s)")
+        db.execute(query, (dept, class_number, section, day))
+
+    cnx.commit()
+    db.close()
+    cnx.close()
+
+#Example
+#add_class("Test_instr", 123, "00:50:00", "14:00:00", "CMSC", "447", 1, "PUP","105", ["MON", "WED"])
 
 def get_list_classes():
     cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,

@@ -1,4 +1,5 @@
 from src.get_classes import get_available_room
+import src.sql_handler
 
 
 def get_rooms_available(instructor, students, duration, time, dept, number, section, day_of_week):
@@ -29,9 +30,8 @@ def get_rooms_available(instructor, students, duration, time, dept, number, sect
     return get_available_room(instructor, students, duration, time, dept, number, section, day_of_week)
 
 #parameter is a single element in the return from get_class_available
-def add_class(TBD):
-    print("Add class")
-    #Add class to database, return success of failure
+def add_class(instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number, days):
+    return(src.sql_handler.add_class(instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number, days))
 
 ''' need primary key(c_dept, c_number, c_section) '''
 def remove_class(dept, number, section):
