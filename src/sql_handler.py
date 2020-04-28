@@ -22,7 +22,7 @@ def get_rooms():
 
 
 def get_rooms_on_day(start_time, dur, days, capacity, is_tech, class_type):
-
+    
     cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
                                   database='SCHEDULER', buffered=True)
     db = cnx.cursor()
@@ -49,12 +49,13 @@ def get_rooms_on_day(start_time, dur, days, capacity, is_tech, class_type):
 
         db.execute(query, data)
 
-    db.close()
-    cnx.close()
-
     rooms = []
     for room in db:
         rooms.append(room)
+
+    db.close()
+    cnx.close()
+
     return rooms
 
 #Example
