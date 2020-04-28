@@ -15,7 +15,7 @@ def no_func():
 
 
 @app.route("/getRooms/")
-def get_list_rooms():
+def getListRooms():
     instructor = request.args.get('instructor')
     students = int(request.args.get('students'))
     duration = int(request.args.get('duration'))
@@ -32,7 +32,7 @@ def get_list_rooms():
 #http://127.0.0.1:5000/getRooms?instructor=TestInstr&students=20&duration=90&time=12:30&dept=CMSC&number=447&section=1&day_of_week=MON,WED
 
 @app.route("/addClass/")
-def add_class():
+def addClass():
     instructor = request.args.get('instructor')
     students = int(request.args.get('students'))
     duration = int(request.args.get('duration'))
