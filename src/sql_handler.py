@@ -68,6 +68,7 @@ def add_class(instructor, capacity, dur, start_time, dept, class_number, section
                                   database='SCHEDULER', buffered=True)
     db = cnx.cursor()
 
+    dur = "00:"+str(dur)+":00"
     class_data = (instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number)
 
     query = ("INSERT INTO class VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)")
@@ -83,7 +84,7 @@ def add_class(instructor, capacity, dur, start_time, dept, class_number, section
     cnx.close()
 
 #Example
-#add_class("Test_instr", 123, "00:50:00", "14:00:00", "CMSC", "447", 1, "PUP","105", ["MON", "WED"])
+add_class("Test_instr", 222, 50, "8:00:00", "CMSC", "111", 1, "PUP","105", ["MON", "WED", "FRI"])
 
 def get_list_classes():
     cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
