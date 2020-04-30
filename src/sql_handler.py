@@ -84,7 +84,7 @@ def add_class(instructor, capacity, dur, start_time, dept, class_number, section
     cnx.close()
 
 #Example
-add_class("Test_instr", 222, 50, "8:00:00", "CMSC", "111", 1, "PUP","105", ["MON", "WED", "FRI"])
+#add_class("Test_instr", 222, 50, "8:00:00", "CMSC", "111", 1, "PUP","105", ["MON", "WED", "FRI"])
 
 def get_list_classes():
     cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
