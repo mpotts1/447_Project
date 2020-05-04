@@ -17,19 +17,24 @@ G = 7
 def getDist(build1, build2):
     distance = round(math.sqrt(((keyDist[build1][0] - keyDist[build2][0])**2 + (keyDist[build1][1] - keyDist[build2][1])**2)), 2)
     return distance
+#example of getDist:
+# getDist("BIO","ENGR")
 
+# a list from closest to most distant of the last used calcDist array.
+calcList = []
 #given a tuple with two items, find the closest building. A tuple is (1, 1). You can use capital letters instead for the first one, like (A, 1). Using it for the second one works but is not recommended for clarity.
 # It returns the string of the abbreviation, not the distance itself.
 def calcDist(location):
     minDist = 20
-    nameMin = ""
     for key in keyDist:
         curDist = math.sqrt((keyDist[key][0] - location[0])**2 + (keyDist[key][1] - location[1])**2)
-        if (curDist < minDist):
-            nameMin = key
-            minDist = curDist
-    return nameMin
-
+        calcList.append((curDist,key))
+    calcList.sort()
+    return calcList
+# example of calcDist:
+# calcDist((D,1))
+# calcDist((4,1)) should work identically to (D,1), and require no initialization of A / B / C / etc
+# however I consider A/B/C more human readable for the sectors.
 
 # An alphabetical list of all keys used.
 keylist = ['AD', 'BIO', 'CHEM', 'ENGR', 'FA', 'ILSB', 'ITE', 'LH1', 'LIB', 'M/P', 'PAHB', 'PHYS', 'PUP', 'RAC', 'SHER', 'SOND', 'TRC', 'UC']
