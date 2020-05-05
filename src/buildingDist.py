@@ -25,6 +25,7 @@ calcList = []
 #given a tuple with two items, find the closest building. A tuple is (1, 1). You can use capital letters instead for the first one, like (A, 1). Using it for the second one works but is not recommended for clarity.
 # It returns the string of the abbreviation, not the distance itself.
 def calcDist(location):
+    del calcList[:]
     minDist = 20
     for key in keyDist:
         curDist = math.sqrt((keyDist[key][0] - location[0])**2 + (keyDist[key][1] - location[1])**2)
