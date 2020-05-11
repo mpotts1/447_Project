@@ -105,7 +105,6 @@ def get_list_classes():
                       "room_num": _class[8]
                      }
         classes.append(temp_class)
-        #print(temp_class["class_instructor"])
     db.close()
     cnx.close()
     return classes
