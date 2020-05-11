@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<style>
+    table, th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<html>
+<head>
+    <h1>All Available Classes</h1>
+</head>
+<body>
+    <table id="table">
+        <tr>
+            <th>Instructor</th>
+            <th># of Students</th>
+            <th>Duration</th>
+            <th>Start Time</th>
+            <th>Dept</th>
+            <th>Number</th>
+            <th>Section</th>
+            <th>Building Name</th>
+            <th>Room Number</th>
+        </tr>
+        {% for class in classes %}
+        <tr>
+            <th>{{ class["instructor"] }}</th>
+            <th>{{ class["students"] }}</th>
+            <th>{{ class["duration"] }}</th>
+            <th>{{ class["start_time"] }}</th>
+            <th>{{ class["dept"] }}</th>
+            <th>{{ class["number"] }}</th>
+            <th>{{ class["section"] }}</th>
+            <th>{{ class["room_building"] }}</th>
+            <th>{{ class["room_num"] }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

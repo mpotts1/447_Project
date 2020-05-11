@@ -68,8 +68,8 @@ def add_class(instructor, capacity, dur, start_time, dept, class_number, section
                                   database='SCHEDULER', buffered=True)
     db = cnx.cursor()
 
-    dur = "00:"+str(dur)+":00"
-    class_data = (instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number)
+    duration = "00:"+str(dur)+":00"
+    class_data = (instructor, capacity, duration, start_time, dept, class_number, section, room_building, room_number)
 
     query = ("INSERT INTO class VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)")
     db.execute(query, class_data)
@@ -91,21 +91,20 @@ def get_list_classes():
                                   database='SCHEDULER', buffered=True)
     db = cnx.cursor()
     db.execute("SELECT * FROM class")
-    db.close()
-    cnx.close()
 
     classes = []
     for _class in db:
-        temp_class = {"class_instructor": _class[0],
-                      "class_students": int(_class[1]),
-                      "class_duration": _class[2],
-                      "class_start_time": _class[3],
-                      "class_dept": _class[4],
-                      "class_number": _class[5],
-                      "class_section": int(_class[6]),
+        temp_class = {"instructor": _class[0],
+                      "students": int(_class[1]),
+                      "duration": _class[2],
+                      "start_time": _class[3],
+                      "dept": _class[4],
+                      "number": _class[5],
+                      "section": int(_class[6]),
                       "room_building": _class[7],
                       "room_num": _class[8]
                      }
-
-    classes.append(temp_class)
+        classes.append(temp_class)
+    db.close()
+    cnx.close()
     return classes
