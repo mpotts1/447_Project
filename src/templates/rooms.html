@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html>
-<title>
-    <head>
-        <h1>Search Results</h1>
-    </head>
-</title>
+<style>
+    table, th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<html> 
 <body>
-    {{  result  }}
+    <h1>Room Search Results</h1>
+    <h3>Confrim the Desired Room by checking the box next to the building and room number.</h3>
+    <form action="http://127.0.0.1:5000/addClass">
+        <table id="table">
+            <tr>
+                <th style="width:20%"></th>
+                <th>Building Name</th>
+                <th style="width:20%"></th>
+                <th>Room Number</th>
+            </tr>
+            {% for room in rooms %}
+            <tr>
+                <th><input type="radio" id="r_building" name="r_building" value={{ room[0] }} /></th>
+                <th>{{ room[0] }}</th>
+                <th><input type="radio" id="r_number" name="r_number" value={{ room[1] }} /></th>
+                <th>{{ room[1] }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="hidden" id="instructor" name="instructor" value={{ instr }} />
+        <input type="hidden" id="students" name="students" value={{ stud }} />
+        <input type="hidden" id="duration" name="duration" value={{ dur }} />
+        <input type="hidden" id="time" name="time" value={{ tim }} />
+        <input type="hidden" id="dept" name="dept" value={{ dep }} />
+        <input type="hidden" id="number" name="number" value={{ num }} />
+        <input type="hidden" id="day_of_week" name="day_of_week" value={{ day }} />
+        <input type="hidden" id="section" name="section" value={{ sect }} />
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
