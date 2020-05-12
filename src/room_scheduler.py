@@ -82,13 +82,19 @@ def room_scheduler(rooms, classes):
         classID = get_classID(_class)
         class_list.append(classID)
         class_rooms = []
-        for room in rooms:
+        if get_roomID(_class) != 'NoneNone':
             temp_class = {}
             for key in _class.keys():
                 temp_class.update({key : _class[key]})
-            temp_class.update({'room_building' : room['room_building']})
-            temp_class.update({'room_num' : room['room_num']})
             class_rooms.append(temp_class)
+        else:
+            for room in rooms:
+                temp_class = {}
+                for key in _class.keys():
+                    temp_class.update({key : _class[key]})
+                temp_class.update({'room_building' : room['room_building']})
+                temp_class.update({'room_num' : room['room_num']})
+                class_rooms.append(temp_class)
         problem.addVariable(str(classID), class_rooms)
 
     problem.addConstraint(room_size_cons, class_list)
