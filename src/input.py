@@ -34,7 +34,7 @@ def add_class(instructor, capacity, dur, start_time, dept, class_number, section
 
 ''' need primary key(c_dept, c_number, c_section) '''
 def remove_class(dept, number, section):
-    print("Remove Class")
+    return(src.sql_handler.delete_class(dept, number,section))
 
 
 def modify_class(dept, number, section):
