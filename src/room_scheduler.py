@@ -2,54 +2,63 @@ import constraint
 import src.sql_handler
 import datetime
 
+room_dict = {}
+class_dict = {}
+
 #A constraint function to check if the room is a sufficient size
-def room_size_cons(classes):
-    for _class in classes:
+def room_size_cons(*class_args):
+    room_size_met = True
+    for _class in class_args:
         room = room_dict[get_roomID(_class)]
         if room['room_capacity'] < _class['students']:
-            return False
-    return True
+            room_size_met = False
+            break
+    if room_size_met:
+        return True
 
 #A constraint function to check if a room is the correct type (Not implemented)
-def room_type_cons(classes):
-    for _class in classes:
+def room_type_cons(*class_args):
+    room_type_met = True
+    for _class in class_args:
         roomID = get_roomID(_class)
         room = room_dict[roomID]
         if room['room_type'] != _class['room_type']:
-            return False
-    return True
+            room_type_met = False
+            break
+    if room_type_met:
+        return True
 
 #A constraint function to see avoid double booking a class
-def double_book_room_cons(classes):
+def double_book_room_cons(*class_args):
+    double_book_room_met = True
     weekdays = ["MON", "TUE", "WED", "THU", "FRI"]
     buffer = datetime.timedelta(0, 600)
-    for class1 in classes:
-        for class2 in classes:
+    for class1 in class_args:
+        for class2 in class_args:
             if get_classID(class1) != get_classID(class2):
                 for day in weekdays:
                     if day in class1['days_of_week'] and day in class2['days_of_week']:
-                        s_hour1, s_min1, s_sec1 = class1['start_time'].split(':')
-                        class1_start = datetime.time(int(s_hour1), int(s_min1), int(s_sec1))
-                        d_hour1, d_min1, d_sec1 = class1['duration'].split(':')
-                        class1_dur = datetime.timedelta(0, int(d_sec1), 0, 0, int(d_min1), int(d_hour1))
+                        class1_start = class1['start_time']
+                        class1_dur = class1['duration']
                         class1_end = class1_start + class1_dur
-                        s_hour2, s_min2, s_sec2 = class2['start_time'].split(':')
-                        class2_start = datetime.time(int(s_hour2), int(s_min2), int(s_sec2))
-                        d_hour2, d_min2, d_sec2 = class2['duration'].split(':')
-                        class2_dur = datetime.timedelta(0, int(d_sec2), 0, 0, int(d_min2), int(d_hour2))
+                        class2_start = class2['start_time']
+                        class2_dur = class2['duration']
                         class2_end = class2_start + class2_dur
                         if class1_start > class2_start and class1_start < class2_end + buffer:
-                            return False
+                            double_book_room_met = False
+                            break
                         if class2_start > class1_start and class2_start < class1_end + buffer:
-                            return False
-    return True
+                            double_book_room_met = False
+                            break
+    if double_book_room_met:
+        return True
 
 #A function that populates a global dict of all rooms so that functions can get room data
 def populate_room_dict(rooms):
     global room_dict
     for room in rooms:
         roomID = get_roomID(room)
-        roomIDs.update({roomID : room})
+        room_dict.update({roomID : room})
 
 #A function that can create a roomID string from class or room dicts
 def get_roomID(dict):
@@ -61,7 +70,7 @@ def get_classID(_class):
 
 def print_solution(solution):
     for classID in class_dict.keys():
-        print("{} : {}".format(classID, get_roomID(solution['classID']))
+        print("{} : {}".format(classID, get_roomID(solution['classID'])))
 
 #This function takes in a list of room and class dicts and returns all of the configurations
 # of classes and rooms within the constraints
@@ -69,19 +78,27 @@ def print_solution(solution):
 def room_scheduler(rooms, classes):
     populate_room_dict(rooms)
     problem = constraint.Problem()
-
     global class_dict
     for _class in classes:
         classID = get_classID(_class)
         class_dict.update({classID : _class})
         class_rooms = []
         for room in rooms:
-            _class['room_building'] = room['room_building']
-            _class['room_num'] = room['room_num']
-            class_rooms.append(_class)
+            temp_class = {}
+            for key in _class.keys():
+                temp_class.update({key : _class[key]})
+            temp_class.update({'room_building' : room['room_building']})
+            temp_class.update({'room_num' : room['room_num']})
+            class_rooms.append(temp_class)
         problem.addVariable(classID, class_rooms)
 
-    problem.addConstraint(room_size_cons, class_dict.keys())
-    problem.addConstraint(double_book_room_cons, class_dict.keys())
+    class_list = []
+    for key in class_dict:
+        class_list.append(str(key))
+
+    problem.addConstraint(room_size_cons, class_list)
+    problem.addConstraint(double_book_room_cons, class_list)
+    
+    solutions = problem.getSolutions()
 
     return solutions

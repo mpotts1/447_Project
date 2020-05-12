@@ -123,14 +123,14 @@ def get_class_day(_class):
         'sect' : _class["section"],
         }
 
-    query = ("SELECT c_day as day "
+    query = ("SELECT c_day "
              "FROM class_day "
              "WHERE c_dept = %(dept)s AND c_number = %(num)s AND c_section = %(sect)s ")
 
     db.execute(query, data)
     class_days = []
-    for day in db:
-        class_days.append(day)
+    for c_day in db:
+        class_days.append(c_day[0])
     
     db.close()
     cnx.close()
