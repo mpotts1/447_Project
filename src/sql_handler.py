@@ -68,7 +68,7 @@ def add_class(instructor, capacity, dur, start_time, dept, class_number, section
                                   database='SCHEDULER', buffered=True)
     db = cnx.cursor()
 
-    duration = "00:"+str(dur)+":00"
+    duration = dur_convert(dur)
     class_data = (instructor, capacity, duration, start_time, dept, class_number, section, room_building, room_number)
 
     query = ("INSERT INTO class VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)")
@@ -137,3 +137,16 @@ def get_class_day(_class):
 
     _class.update({"days_of_week" : class_days})
     return _class
+
+def dur_convert(dur):
+
+    if(dur == 50):
+        return "00:50:00"
+
+    if(dur == 75):
+        return "01:05:00"
+
+    if(dur == 150):
+        return "02:30:00"
+
+    return "00:00:00"

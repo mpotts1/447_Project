@@ -26,7 +26,7 @@ def get_rooms_available(instructor, students, duration, time, dept, number, sect
         return invalid_data
 
     #Will return a list of all available rooms from constraints
-    return get_available_room(instructor, students, duration, time, dept, number, section, day_of_week)
+    return src.sql_handler.get_rooms_on_day(time, duration, day_of_week, students, 0, "LECTURE")
 
 #parameter is a single element in the return from get_class_available
 def add_class(instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number, days):
