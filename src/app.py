@@ -35,13 +35,14 @@ def getListRooms():
     if request.args.get('monday') == "on":
         days += "MON,"
     if request.args.get('tuesday') == "on":
-        days += "TUES,"
+        days += "TUE,"
     if request.args.get('wednesday') == "on":
         days += "WED,"
     if request.args.get('thursday') == "on":
-        days += "THURS,"
+        days += "THU,"
     if request.args.get('friday') == "on":
-        days += "FRI"
+        days += "FRI,"
+    days = days[0:-1]
     day_of_week = days.split(",")
     print(days)
     result = get_rooms_available(instructor, students, duration, time, dept, number, section, day_of_week)
@@ -55,7 +56,7 @@ def getListRooms():
 def addClass():
     instructor = request.args.get('instructor')
     students = int(request.args.get('students'))
-    duration = request.args.get('duration')
+    duration = int(request.args.get('duration'))
     time = request.args.get('time')
     dept = request.args.get('dept')
     number = request.args.get('number')
@@ -64,7 +65,7 @@ def addClass():
     room_building = request.args.get('r_building')
     room_number = request.args.get('r_number')
     print(request.args.get('day_of_week'))
-    #print(day_of_week)
+    print(day_of_week)
     result = add_class(instructor, students, duration, time, dept, number, section, room_building, room_number, day_of_week)
 
     return redirect(url_for('home'))
@@ -81,8 +82,8 @@ def removeClass():
     section = int(request.args.get('section'))
 
     result = remove_class(dept, number, section)
-
-    return render_template('removeClass.html', classes = result)
+    print(result)
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run()

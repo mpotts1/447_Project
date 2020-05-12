@@ -7,14 +7,29 @@
 </style>
 <html>
 <head>
-    <title>Scheduling App</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/app.css') }}">
+    <title>Scheduling Web App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h1>Room Search Results</h1>
-    <h3>Confrim the Desired Room by checking the box next to the building and room number.</h3>
-    <form action="http://127.0.0.1:5000/addClass">
-        <table id="table">
+    <div class="w3-top">
+        <div class="w3-bar w3-amber w3-card w3-left-align w3-large">
+            <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-white">Home</a>
+            <a href="/inputNewClass" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Add Class</a>
+            <a href="/inputOldClass" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Remove Class</a>
+            <a href="/displayClasses" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">View All Classes</a>
+        </div>
+    </div>
+    <header class="w3-container w3-amber w3-center" style="padding:50px">
+        <h1>Room Search Results</h1>
+        <h3>Confrim the Desired Room by checking the box next to the building and room number.</h3>
+    </header>
+    <form class="w3-center w3-container" action="http://127.0.0.1:5000/addClass">
+        <table id="table" class="w3-table w3-centered">
             <tr>
                 <th style="width:20%"></th>
                 <th>Building Name</th>

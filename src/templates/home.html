@@ -1,24 +1,32 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-	<head>
-		<title>Scheduling App</title>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/app.css') }}">
-	</head>
-    <body>
-        <h1>Search Course Catalog</h1>
-        <form action="http://127.0.0.1:5000/inputNewClass">
-            <p>
-                <input type="submit" value="Add Class">
-            </p>
-        </form>
-        <form action="http://127.0.0.1:5000/inputOldClass">
-            <p>
-                <input type="submit" value="Remove Class">
-            </p>
-        </form>
-        <form action="http://127.0.0.1:5000/displayClasses">
-            <input type="submit" value="View All Classes">
-            </p>
-        </form>
-    </body>
+<head>
+    <title>Scheduling Web App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="w3-top">
+        <div class="w3-bar w3-amber w3-card w3-left-align w3-large">
+            <a href="/" class="w3-bar-item w3-button w3-padding-large w3-hover-white">Home</a>
+            <a href="/inputNewClass" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Add Class</a>
+            <a href="/inputOldClass" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Remove Class</a>
+            <a href="/displayClasses" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">View All Classes</a>
+        </div>
+    </div>
+    <h1 class="w3-center w3-amber" style="padding:50px">Search Course Catalog</h1>
+    <form class="w3-center" action="http://127.0.0.1:5000/inputNewClass">
+            <input type="submit" value="Add Class" class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
+    </form>
+    <form class="w3-center" action="http://127.0.0.1:5000/inputOldClass">
+            <input type="submit" value="Remove Class" class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
+    </form>
+    <form class="w3-center" action="http://127.0.0.1:5000/displayClasses">
+        <input type="submit" value="View All Classes" class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
+    </form>
+</body>
 </html>
