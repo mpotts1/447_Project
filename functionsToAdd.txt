@@ -1,6 +1,0 @@
-This file includes brief descriptions of functions that may be valuable.
-As they are implemented, it would be nice to remove them.
-
-room.isEmpty(time, duration, day_of_week): a function that checks the availablity of a room at
-	(time) for a period of (duration) on the days specified by (day_of_week)
-

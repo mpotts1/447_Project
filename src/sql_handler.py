@@ -108,3 +108,32 @@ def get_list_classes():
     db.close()
     cnx.close()
     return classes
+
+#This function takes in a class dict and adds a field containing a list of the days of the week on which that
+#class occurs
+#Assumes _class is a dict with at least the the fields for department, number, and section
+def get_class_day(_class):
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
+
+    data = {
+        'dept' : _class["dept"],
+        'num' : _class["number"],
+        'sect' : _class["section"],
+        }
+
+    query = ("SELECT c_day as day "
+             "FROM class_day "
+             "WHERE c_dept = %(dept)s AND c_number = %(num)s AND c_section = %(sect)s ")
+
+    db.execute(query, data)
+    class_days = []
+    for day in db:
+        class_days.append(day)
+    
+    db.close()
+    cnx.close()
+
+    _class.update({"days_of_week" : class_days})
+    return _class
