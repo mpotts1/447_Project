@@ -1,11 +1,10 @@
 import mysql.connector
 
-cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
-                              database='SCHEDULER', buffered=True)
-db = cnx.cursor()
-
 
 def get_rooms():
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
 
     db.execute("SELECT * FROM room")
     db.close()
@@ -24,7 +23,9 @@ def get_rooms():
 
 
 def get_rooms_on_day(start_time, dur, days, capacity, is_tech, class_type):
-
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
 
     for day in days:
 
@@ -62,6 +63,9 @@ def get_rooms_on_day(start_time, dur, days, capacity, is_tech, class_type):
 
 
 def add_class(instructor, capacity, dur, start_time, dept, class_number, section, room_building, room_number, days):
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
 
     duration = dur_convert(dur)
     class_data = (instructor, capacity, duration, start_time, dept, class_number, section, room_building, room_number)
@@ -82,6 +86,9 @@ def add_class(instructor, capacity, dur, start_time, dept, class_number, section
 #add_class("Test_instr", 222, 50, "8:00:00", "CMSC", "111", 1, "PUP","105", ["MON", "WED", "FRI"])
 
 def get_list_classes():
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
 
     db.execute("SELECT * FROM class")
 
@@ -106,6 +113,9 @@ def get_list_classes():
 #class occurs
 #Assumes _class is a dict with at least the the fields for department, number, and section
 def get_class_day(_class):
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
 
     data = {
         'dept' : _class["dept"],
@@ -129,10 +139,13 @@ def get_class_day(_class):
     return _class
 
 def delete_class(dept, number, section):
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
 
     query = ("DELETE FROM class_day WHERE c_dept = %s and c_number = %s and c_section = %s")
     db.execute(query, (dept, number, section))
-    
+
     db.close()
     cnx.close()
 
