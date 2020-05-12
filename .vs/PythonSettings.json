@@ -1,4 +1,3 @@
 {
-  "TestFramework": "Pytest",
-  "Interpreter": "Global|ContinuumAnalytics|Anaconda37-64"
+  "Interpreter": "CondaEnv|CondaEnv|Anaconda3"
 }
