@@ -146,8 +146,15 @@ def delete_class(dept, number, section):
     query = ("DELETE FROM class_day WHERE c_dept = %s and c_number = %s and c_section = %s")
     db.execute(query, (dept, number, section))
 
+    query = ("DELETE FROM class WHERE c_dept = %s and c_number = %s and c_section = %s")
+    db.execute(query, (dept, number, section))
+
+    cnx.commit()
+
     db.close()
     cnx.close()
+
+#delete_class( "CMSC", 421, 5)
 
 def dur_convert(dur):
 
