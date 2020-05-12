@@ -3,7 +3,6 @@ import src.sql_handler
 import datetime
 
 room_dict = {}
-class_dict = {}
 
 #A constraint function to check if the room is a sufficient size
 def room_size_cons(*class_args):
@@ -69,8 +68,8 @@ def get_classID(_class):
     return str(_class['dept']) + str(_class['number']) + ':' + str(_class['section'])
 
 def print_solution(solution):
-    for classID in class_dict.keys():
-        print("{} : {}".format(classID, get_roomID(solution['classID'])))
+    for classID in solution:
+        print("{} : {}".format(classID, get_roomID(solution[classID])))
 
 #This function takes in a list of room and class dicts and returns all of the configurations
 # of classes and rooms within the constraints
@@ -78,23 +77,25 @@ def print_solution(solution):
 def room_scheduler(rooms, classes):
     populate_room_dict(rooms)
     problem = constraint.Problem()
-    global class_dict
+    class_list = []
     for _class in classes:
         classID = get_classID(_class)
-        class_dict.update({classID : _class})
+        class_list.append(classID)
         class_rooms = []
-        for room in rooms:
+        if get_roomID(_class) != 'NoneNone':
             temp_class = {}
             for key in _class.keys():
                 temp_class.update({key : _class[key]})
-            temp_class.update({'room_building' : room['room_building']})
-            temp_class.update({'room_num' : room['room_num']})
             class_rooms.append(temp_class)
-        problem.addVariable(classID, class_rooms)
-
-    class_list = []
-    for key in class_dict:
-        class_list.append(str(key))
+        else:
+            for room in rooms:
+                temp_class = {}
+                for key in _class.keys():
+                    temp_class.update({key : _class[key]})
+                temp_class.update({'room_building' : room['room_building']})
+                temp_class.update({'room_num' : room['room_num']})
+                class_rooms.append(temp_class)
+        problem.addVariable(str(classID), class_rooms)
 
     problem.addConstraint(room_size_cons, class_list)
     problem.addConstraint(double_book_room_cons, class_list)

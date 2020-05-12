@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scheduling App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/app.css') }}">
+</head>
+<body>
+    <h3>Input Class To Be Removed</h3>
+    <form action="http://127.0.0.1:5000/removeClass">
+        <div>Dept</div>
+        <div><input type="text" id="dept" name="dept" /></div>
+
+        <div>Class Number</div>
+        <div><input type="text" id="number" name="number" /></div>
+
+        <div>Class Section</div>
+        <div><input type="text" id="section" name="section" /></div>
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+</body>
+</html>

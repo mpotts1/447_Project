@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scheduling App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/app.css') }}">
+</head>
+<body>
+    <h3>Input Class To Be Added</h3>
+    <form action="http://127.0.0.1:5000/getRooms">
+        <div>Instructor Name</div>
+        <div><input type="text" id="instructor" name="instructor" /></div>
+
+        <div>Number of Students</div>
+        <div><input type="text" id="students" name="students" /></div>
+
+        <div>Time (hh:mm)</div>
+        <div><input type="text" id="time" name="time" /></div>
+
+        <div>Dept</div>
+        <div><input type="text" id="dept" name="dept" /></div>
+
+        <div>Class Number</div>
+        <div><input type="text" id="number" name="number" /></div>
+
+        <div>Class Section</div>
+        <div><input type="text" id="section" name="section" /></div>
+
+        <div>Days of Week:</div>
+        <label><input type="checkbox" name="monday">Monday</label>
+        <label><input type="checkbox" name="tuesday">Tuesday</label>
+        <label><input type="checkbox" name="wednesday">Wednesday</label>
+        <label><input type="checkbox" name="thursday">Thursday</label>
+        <label><input type="checkbox" name="friday">Friday</label>
+        <div>
+            <label for="duration"><br />Select Duration:</label>
+            <select id="duration" name="duration">
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="150">150</option>
+            </select>
+        </div>
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+</body>
+</html>
