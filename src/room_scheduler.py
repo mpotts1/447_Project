@@ -117,4 +117,15 @@ def get_class_utilization(solution):
         unoccupied_seat_rating += room_capacity - class_size
     return unoccupied_seat_rating
 
-def solution_sort_by_class_size():
+#A function that selects the best solutions on the basis of having the fewest open seats in each class
+def find_best_solution_by_class_size(solutions):
+    best_solution = 0
+    #An arbitrarily large number to act as a value that any solution could beat
+    min_unoccupied_seats = 9999999999999999
+    for solution in range(len(solutions)):
+        rating = get_class_utilization(solutions[solution])
+        if min_unoccupied_seats > rating:
+            best_solution = solution
+            min_unoccupied_seats = rating
+    return solutions[solution]
+
