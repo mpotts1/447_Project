@@ -156,6 +156,28 @@ def delete_class(dept, number, section):
 
 #delete_class( "CMSC", 421, 5)
 
+#A function that takes in a dict of class (
+def assign_room(solution):
+    cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
+                                  database='SCHEDULER', buffered=True)
+    db = cnx.cursor()
+
+    for classID in solution:
+        temp_class = solution[classID]
+        data = {
+            'c_dept' : temp_class['dept'],
+            'c_number' : temp_class['number'],
+            'c_section' : temp_class['section'],
+            'r_building' : temp_class['room_buidling'],
+            'r_no' : temp_class['room_num']
+            }
+        query = 'UPDATE class SET r_building= %(r_building)s, r_no = %(r_no)s WHERE (c_dept = %(c_dept)s AND c_number = %(c_number)s AND c_section = %(c_section)s)'
+        db.execute(query, data)
+    
+    cnx.commit()
+    db.close()
+    cnx.close()
+
 def dur_convert(dur):
 
     if(dur == 50):
