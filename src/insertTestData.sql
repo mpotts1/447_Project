@@ -8,30 +8,19 @@
 use SCHEDULER;
 
 -- 						build	num		cap		tech	type
-insert into room values("SOND",	"201",	40,		false,	"ACTVLRN");
-insert into room values("SOND",	"202",	45,		false,	"ACTVLRN");
-insert into room values("SOND",	"203",	100,	true,	"THEATER");
-insert into room values("SOND",	"301",	200,	false,	"LECTURE");
-insert into room values("LH1",	"101",	200,	false,	"LECTURE");
+insert into room values("PUP",	"105",	120,	false,	"LECTURE");
+insert into room values("ENGR",	"122",	100,	true,	"LECTURE");
+insert into room values("ENGR",	"122A",	100,	true,	"LECTURE");
+insert into room values("ITE",	"227",	60,		false,	"THEATER");
+insert into room values("ILSB",	"237",	60,		true,	"ACTVLRN");
+insert into room values("SOND",	"109",	50,		false,	"SEMINAR");
+insert into room values("CHEM",	"030",	50,		false,	"LECTURE");
+insert into room values("SHER",	"014",	50,		false,	"SEMINAR");
+insert into room values("BIO",	"120",	40,		false,	"THEATER");
+insert into room values("ILSB",	"233",	40,		true,	"ACTVLRN");
+insert into room values("M/P",	"106",	40,		false,	"THEATER");
+insert into room values("SHER",	"013",	40,		false,	"SEMINAR");
+insert into room values("SHER",	"151",	30,		false,	"SEMINAR");
 
--- 						instructor				studnts	durat	start	dept	class	sec	build	num
-insert into class values("Marcus Smith",		31,		011500,	113000,	"CMPE",	"201",	1, 	"SOND", "201");
-insert into class values("Jean Perez",			110,	005000,	140000,	"SOCY",	"101",	11, "SOND",	"301");
-insert into class values("Maria Ali",			121,	005000,	110000,	"GES",	"110",	6,	"SOND", "301");
-insert into class values("Marcus Smith",		28,		011500,	130000,	"CMPE",	"201",	2, 	"SOND", "201");
-insert into class values("Rick Johnson",		20,		023000,	143000,	"PHYS",	"122L",	4,	"SOND",	"202");
-
--- 							dept		class	sec	day
-insert into class_day values("CMPE",	"201",	1, 	"MON");
-insert into class_day values("CMPE",	"201",	1, 	"WED");
-insert into class_day values("SOCY",	"101",	11,	"MON");
-insert into class_day values("SOCY",	"101",	11,	"WED");
-insert into class_day values("SOCY",	"101",	11,	"FRI");
-insert into class_day values("GES",		"110",	6,	"TUE");
-insert into class_day values("GES",		"110",	6,	"THU");
-insert into class_day values("CMPE",	"201",	2, 	"MON");
-insert into class_day values("CMPE",	"201",	2, 	"WED");
-insert into class_day values("PHYS",	"122L",	4, 	"THU");
-
-select * from class order by c_start_time asc;
+select * from c_d group by c_day order by c_start_time asc;
 select * from room;

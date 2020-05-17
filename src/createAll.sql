@@ -3,8 +3,6 @@
 
 -- createAll: creates the database itself, all relevant tables, and any necessary triggers or views
 
--- Executable only with admin permissions.
-
 -- Last modified date: 2020-03-28
 
 create database SCHEDULER;
@@ -16,14 +14,14 @@ create table room(
     r_no			varchar(4), check (r_no between "001" and "599Z"),
     r_capacity		numeric(3,0), check (r_capacity is not null), check (r_capacity > 0),
     r_tech			bool,
-    r_type			enum ("ACTVLRN","LECTURE","COMPLAB","THEATER"),
+    r_type			enum ("ACTVLRN","LECTURE","COMPLAB","THEATER","SEMINAR"),
     primary key(r_building, r_no)
     );
     
 create table class(
 	c_instructor	varchar(50),
     c_students		numeric(3,0), check (c_students is not null), check (c_students >= 0),
-    c_duration		time, check (c_duration+0 in (005000, 011500, 023000)),
+    c_duration		time,
     
     -- Note that the string format of time ("HH:MM:SS") is retrieved by default; adding to numeric 0 (as in the check clause above) results in the below formats
     -- Examples:

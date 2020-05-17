@@ -4,7 +4,6 @@
 -- dropAll: deletes all database elements and the database itself
 
 -- For testing purposes only.
--- Executable only with admin permissions.
 
 -- Last modified date: 2020-03-28
 

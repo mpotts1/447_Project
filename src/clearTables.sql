@@ -14,4 +14,5 @@ delete from class_day;
 delete from class;
 delete from room;
 
+select * from room order by r_building desc, r_no asc;
 select * from c_d order by c_start_time asc;
