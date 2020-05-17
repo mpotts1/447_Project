@@ -156,7 +156,7 @@ def delete_class(dept, number, section):
 
 #delete_class( "CMSC", 421, 5)
 
-#A function that takes in a dict of class (
+#A function that takes in a dict of classes (a solution from room_scheduler) and updates the database
 def assign_room(solution):
     cnx = mysql.connector.connect(user='user', password='team_terminal', host='96.244.68.135', port=3306,
                                   database='SCHEDULER', buffered=True)
