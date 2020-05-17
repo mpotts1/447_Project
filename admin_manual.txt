@@ -6,14 +6,20 @@ Installation/execution instructions for application:
 
 Installation/configuration instructions for database server:
 
-(Note that this section was included just for completeness; 
-the connection as specified in the source code for this project will work for testing/grading purposes)
+(Note that this section was included just for completeness; the connection as specified in the source code for this project will work for testing/grading purposes)
 
-On the server machine, install and run a MySQL-compatible database system
-(The application was built using the MySQL community server package from https://dev.mysql.com/downloads/mysql/)
+On the server machine, install and run a MySQL-compatible database system(The application was built using the MySQL community server package from https://dev.mysql.com/downloads/mysql/)
 
 Change the IP and port (and username/password, if neccessary) in the connection declarations located in the python scripts handling sql queries
 
 On the server machine with the server running, execute the file "createAll.sql"
 
-If the application cannot connect, verify that the firewall settings for the server machine allow incoming traffic on the port assigned to the server
+If the application cannot connect, verify that the firewall settings for the server machine allow incoming traffic on the port assigned to the server.
+
+
+
+Database maintenance scripts:
+
+Executing "insertTestData.sql" will fill the room table with the rooms specified by the project documentation
+Executing "clearTables.sql" will empty all the project tables, but leave the tables themselves intact, ready to be filled
+Executing "dropAll.sql" will delete the tables and database themselves. You'll need to execute "createAll.sql" after this to use the database again.
