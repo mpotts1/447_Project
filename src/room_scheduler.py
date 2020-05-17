@@ -67,6 +67,8 @@ def get_roomID(dict):
 def get_classID(_class):
     return str(_class['dept']) + str(_class['number']) + ':' + str(_class['section'])
 
+#A function to print solutions in a pleasing format
+#The format is: ClassID: RoomID
 def print_solution(solution):
     for classID in solution:
         print("{} : {}".format(classID, get_roomID(solution[classID])))
@@ -82,7 +84,7 @@ def room_scheduler(rooms, classes):
         classID = get_classID(_class)
         class_list.append(classID)
         class_rooms = []
-        if get_roomID(_class) != 'NoneNone':
+        if get_roomID(_class) != 'NoneNone' or get_roomID(_class) != 'NullNull':
             temp_class = {}
             for key in _class.keys():
                 temp_class.update({key : _class[key]})
@@ -103,3 +105,16 @@ def room_scheduler(rooms, classes):
     solutions = problem.getSolutions()
 
     return solutions
+
+def get_class_utilization(solution):
+    unoccupied_seat_rating = 0
+    for classID in solution:
+        temp_class = solution[classID]
+        class_size = temp_class['students']
+        roomID = get_roomID(solution[classID])
+        temp_room = room_dict[roomID]
+        room_capacity = temp_room['room_capacity']
+        unoccupied_seat_rating += room_capacity - class_size
+    return unoccupied_seat_rating
+
+def solution_sort_by_class_size():
