@@ -120,12 +120,15 @@ def get_class_utilization(solution):
 #A function that selects the best solutions on the basis of having the fewest open seats in each class
 def find_best_solution_by_class_size(solutions):
     best_solution = 0
+    i = 0
     #An arbitrarily large number to act as a value that any solution could beat
     min_unoccupied_seats = 9999999999999999
-    for solution in range(len(solutions)):
+    print(len(solutions))
+    for solution in solutions:
         rating = get_class_utilization(solutions[solution])
         if min_unoccupied_seats > rating:
-            best_solution = solution
+            best_solution = i
             min_unoccupied_seats = rating
-    return solutions[solution]
+        i = i + 1
+    return solutions[best_solution]
 

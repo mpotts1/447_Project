@@ -7,10 +7,10 @@ def get_rooms():
     db = cnx.cursor()
 
     db.execute("SELECT * FROM room")
-    db.close()
-    cnx.close()
+
 
     rooms = []
+
     for room in db:
         temp_room = {"room_building": room[0],
                      "room_num": room[1],
@@ -19,6 +19,8 @@ def get_rooms():
                      "room_type": room[4]
                      }
         rooms.append(temp_room)
+    db.close()
+    cnx.close()
     return rooms
 
 
