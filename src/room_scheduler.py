@@ -85,10 +85,7 @@ def room_scheduler(rooms, classes):
         class_list.append(classID)
         class_rooms = []
         if get_roomID(_class) != 'NoneNone':
-            temp_class = {}
-            for key in _class.keys():
-                temp_class.update({key : _class[key]})
-            class_rooms.append(temp_class)
+            class_rooms.append(_class)
         else:
             for room in rooms:
                 temp_class = {}
