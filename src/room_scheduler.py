@@ -88,9 +88,9 @@ def room_scheduler(rooms, classes):
             temp_class = {}
             for key in _class.keys():
                 temp_class.update({key : _class[key]})
-                temp_class.update({'room_building' : room['room_building']})
-                temp_class.update({'room_num' : room['room_num']})
-                class_rooms.append(temp_class)
+            temp_class.update({'room_building' : room['room_building']})
+            temp_class.update({'room_num' : room['room_num']})
+            class_rooms.append(temp_class)
         problem.addVariable(str(classID), class_rooms)
 
     problem.addConstraint(room_size_cons, class_list)
